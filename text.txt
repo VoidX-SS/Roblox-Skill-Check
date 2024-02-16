@@ -1,7 +1,7 @@
 local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt"))()
 local scriptswin = DiscordLib:Window("Void X Remaster")
 
-local CHAIN = scriptwin:Server("CHAIN")
+local CHAIN = scriptswin:Server("CHAIN","")
 
 local CharacterChain = CHAIN:Channel("Character")
 local MiscChain = CHAIN:Channel("Misc")
