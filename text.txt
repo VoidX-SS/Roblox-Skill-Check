@@ -1,10 +1,13 @@
 local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt"))()
 local scriptswin = DiscordLib:Window("Void X Remaster")
 
-local CHAIN = scriptswin:Server("CHAIN","")
+local CHAIN = scriptswin:Server("CHAIN", "")
 
 local CharacterChain = CHAIN:Channel("Character")
+local TeleportChain = CHAIN:Channel("Teleport")
+local VisualChain = CHAIN:Channel("Visual")
 local MiscChain = CHAIN:Channel("Misc")
+
 
 CharacterChain:Button("Infinite Stamina", function()
     local mt = getrawmetatable(game.Players.LocalPlayer.Character);
@@ -13,7 +16,7 @@ local old_index = mt.__index;
 
 mt.__index = function(a, b) 
 if tostring(a) == "Stamina" then 
-if tostring(b) == "Value" then return 9999; 
+if tostring(b) == "Value" then return 999; 
 end 
 end 
 return old_index(a, b);
@@ -42,7 +45,21 @@ local old_index = mt.__index;
 
 mt.__index = function(a, b) 
 if tostring(a) == "StaminaRegen" then 
-if tostring(b) == "Value" then return 1000; 
+if tostring(b) == "Value" then return 100; 
+end 
+end 
+return old_index(a, b);
+end
+end)
+
+CharacterChain:Button("Infinite Dodge", function()
+    local mt = getrawmetatable(game.Players.LocalPlayer.Character);
+make_writeable(mt); 
+local old_index = mt.__index;
+
+mt.__index = function(a, b) 
+if tostring(a) == "Dodging" then 
+if tostring(b) == "Value" then return true; 
 end 
 end 
 return old_index(a, b);
@@ -50,7 +67,7 @@ end
 end)
 
 
-CharacterChain:Button("Inf Dodge", function()
+CharacterChain:Button("Always Dodging (Lag)", function()
     while true do wait(0.2)
 local args = {
     [1] = "Dodge"
@@ -60,10 +77,39 @@ game:GetService("Players").LocalPlayer.Character.CharacterMobility.CTS:FireServe
 end
 end)
 
+CharacterChain:Button("Always Block with Machete (Lag)", function()
+   while true do wait(0.1)
+local args = {
+    [1] = "ParryBegin"
+}
 
-MiscChain:Button("Kill Chain (Broken)", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/DeathMachine07/ProjectDark/main/CHAINS"))()
+game:GetService("Players").LocalPlayer.Character.CharacterHandler.Contents.Remotes.Interact:FireServer(unpack(args))
+end
 end)
+
+CharacterChain:Button("Always Swing Machete (Lag)", function()
+   while true do wait(0.1)
+local args = {
+    [1] = "MacheteSwing2"
+}
+
+game:GetService("Players").LocalPlayer.Character.CharacterHandler.Contents.Remotes.Interact:FireServer(unpack(args))
+end
+end)
+
+MiscChain:Button("Warp Chain to Location", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/DeathMachine07/UniqueDemon/main/DemonLordV2"))()
+end)
+
+MiscChain:Button("Dupe Points Power", function()
+   for i = 1,2000 do
+fireproximityprompt(game.Workspace.GameStuff.GameSections.POWERSTATION.Hitbox.ProximityPrompt)
+end
+end)
+
+-- MiscChain:Button("Insta Kill Chain", function()
+  --  loadstring(game:HttpGet("https://raw.githubusercontent.com/DeathMachine07/ProjectDark/main/CHAINS"))()
+--end)
 
 MiscChain:Button("Chain ESP", function()
 local FillColor = Color3.fromRGB(81, 65, 79)
@@ -131,10 +177,88 @@ billboardGui.Parent = Child.Head
 end)
 end)
 
+MiscChain:Button("Open Supply & Shop & Doors", function()
+    local Player = game.Players.LocalPlayer
+local Character = Player.Character
+
+for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+  if v.ClassName == "ProximityPrompt" then
+    Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+   
+      fireproximityprompt(v)
+    local args = {
+      [1] = "Looting34534534534534345345"
+      }
+
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Contents.Remotes.Interact:FireServer(unpack(args))
+    wait(0.2)
+  end
+end
+end)
+
 MiscChain:Button("Delete Borders", function()
     workspace.Misc.Barriers:ClearAllChildren()
 end)
 
-MiscChain:Button("Extend Machete Hitbox (Need to Hold)", function()
-    game.Players.LocalPlayer.Character.Machete.Handle.Size = Vector3.new(15,15,15)
+
+--MiscChain:Button("Extend Machete Hitbox (Need to Hold)", function()
+ --   game.Players.LocalPlayer.Character.Machete.Handle.Size = Vector3.new(15,15,15)
+--end)
+
+TeleportChain:Button("PowerStation", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-208, 60, -130)
+end)
+
+TeleportChain:Button("Small Cabin", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(161, 60, 231)
+end)
+
+TeleportChain:Button("Warehouse", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(325, 60, -229)
+end)
+
+TeleportChain:Button("Car Cabin", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(149, 60, 2)
+end)
+
+TeleportChain:Button("Safehouse", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(179, 60, -36)
+end)
+
+TeleportChain:Button("Campfire", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(297, 60, 167)
+end)
+
+TeleportChain:Button("Shop", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-210, 20, -242)
+end)
+
+TeleportChain:Button("CHAIN Spawn", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-18, 20, -226)
+end)
+
+VisualChain:Button("Fullbright", function()
+    game.Lighting.FogEnd = 100000000000
+    game.Lighting.FogStart = 10000000000
+    game.Lighting.ClockTime = 12
+    game.Lighting.Brightness = 5
+    game.Lighting.GlobalShadows = false
+for i,v in pairs(game.Lighting:GetChildren()) do
+      if v.Name ~= "Misc" then
+v:Destroy()
+end
+end
+end)
+
+VisualChain:Button("Game Sections", function()
+    local Player = game.Players.LocalPlayer
+local Character = Player.Character
+
+for i,v in pairs(game:GetService("Workspace").Misc:GetDescendants()) do
+  if v.ClassName == "ProximityPrompt" then
+    Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+    fireproximityprompt(v)
+    wait(1)
+  end
+end
 end)
